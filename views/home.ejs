@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title><%=title%></title>
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/product.css">
+    <style media="screen">
+
+    .btn {
+      display: inline-block;
+      padding: 0.25rem 1rem;
+      text-decoration: none;
+      font: inherit;
+      border: 1px solid #00695c;
+      color: #00695c;
+      background: white;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+   .btn-avail{
+     margin : 20px;
+     margin-left: 25%;
+   }
+    .btn-avail:hover,
+    .btn-avail:active {
+      background-color: #00695c;
+      color: white;
+    }
+
+    </style>
+  </head>
+  <body>
+        <%- include('navigation'); %>
+        <!-- <h1>Home Page</h1> -->
+               <div class="grid">
+                       <% for (let product of products) { %>
+                           <article class="card product-item">
+                               <header class="card__header">
+                                   <h1 class="product__title">
+                                       <%= product.p_name %>
+                                   </h1>
+                               </header>
+                               <div class="card__image">
+
+                               </div>
+                               <div class="card__content">
+                                   <h2 class="product__price">Rs.
+                                       <%= product.p_price %>
+                                   </h2>
+                                   <p class="product__description">
+                                       <%= product.p_description %>
+                                   </p>
+                               </div>
+                               <%if(setOfIds){%>
+
+                               <%if(!setOfIds.has(product.p_id)) { %>
+                                 <div class="">
+                                  <u>this product is unavailable in your region</u>
+                                 <% } else {%>
+
+                                     <form  action="/cart" method="post" class="form-submissions" >
+                                       <input type="hidden" name="p_id" value="<%=product.p_id%>">
+                                       <label for="quantity">Quantity</label> : <input name='quantity' type="number" id="myNumber" min='1' max='5'>
+                                       <button class="btn btn-avail" type="submit" >Add to Cart</button>
+                                     </form>
+                                  <% } %>
+
+                            <% } %>
+                           </article>
+                           <% } %>
+                   </div>
+
+
+  </body>
+</html>

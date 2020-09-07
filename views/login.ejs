@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> <%=title%> </title>
+    <link rel="stylesheet" href="/login.css">
+    <link rel="stylesheet" href="/nav.css">
+
+  </head>
+  <body>
+<!-- <h1>Company Name</h1> -->
+<%- include('navigation'); %>
+
+<div class="">
+  <%if (message.length > 0){%>
+    <%=message%>
+    <%}%>
+  </div>
+    <div class="login-card">
+      <form class="login-form" action="/" method="POST">
+        <div class="form-control">
+          <label for="email">E-Mail</label>
+          <input type="email" name="email" id="email" required>
+        </div>
+        <div class="form-control">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" required>
+        </div>
+        <div class="form-submissions">
+          <button class="btn" type="submit">Login</button>
+          <a href="/signup" class='btn'> Create Account</a>
+        </div>
+      </form>
+    </div>
+
+  </body>
+</html>

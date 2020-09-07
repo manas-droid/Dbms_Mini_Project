@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title><%=title%></title>
+    <link rel="stylesheet" href="/nav.css">
+    <link rel="stylesheet" href="/login.css">
+
+  </head>
+  <body>
+    <!-- <h1>Company Name</h1>
+   -->
+   <%- include('navigation'); %>
+
+   <div class="">
+     <%if (message.length > 0){%>
+       <%=message%>
+       <%}%>
+     </div>
+    <div class="login-card">
+      <form class="login-form" action="/login" method="POST">
+        <div class="form-control">
+          <label for="name">Name</label>
+          <input type="text" name="name" required>
+        </div>
+        <div class="form-control">
+          <label for="email">E-Mail</label>
+          <input type="email" name="email"  required>
+        </div>
+        <div class="form-control">
+          <label for="address">Address</label>
+         <textarea name="address" rows="1" cols="8"required></textarea>
+        </div>
+        <div class="form-control">
+          <label for="state">State</label>
+         <input type="text" name="state" value=""required>
+        </div>
+        <div class="form-control">
+          <label for="address">City</label>
+         <input type="text" name="city" value=""required>
+        </div>
+        <div class="form-control">
+          <label for="zip">Zip-Code</label>
+         <input type="text" name="zip" value=""required>
+        </div>
+        <div class="form-control">
+          <label for="phone">Phone Number</label>
+         <input type="text" name="phone" value="" required>
+        </div>
+        <div class="form-control">
+          <label for="password">Password</label>
+          <input type="password" name="password" required>
+        </div>
+        <div class="form-control">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" name="confirmPassword" required>
+        </div>
+        <div class="log-submissions">
+          <button class="btn" type="submit">Continue</button>
+          <label id="label">
+            Already have account?
+            <a href="/login">Login </a>
+          </label>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
