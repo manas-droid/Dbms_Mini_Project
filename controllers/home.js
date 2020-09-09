@@ -4,7 +4,6 @@ const bcrypt = require('bcrypt');
 
 exports.getHomePage = (req,res)=>{
   if(req.session.isLoggedIn){
-    console.log(req.session.user_id);
     Users.getCityById(req.session.user_id).then(([userCity])=>{
         return userCity[0].user_city;
     }).then((city)=>{
@@ -28,8 +27,6 @@ exports.getHomePage = (req,res)=>{
   }
   else {
     Products.fetchAll().then(([products])=>{
-
-      console.log( products);
       res.render('home',{
         title : 'home page',
         setOfIds : undefined,
@@ -55,6 +52,8 @@ exports.postHomePage = (req,res)=>{
       if(doMatch){
         req.session.user_id = user[0].user_id;
         req.session.isLoggedIn = true;
+        req.session.cookie.expires = new Date( Date.now() + (90*24*36000));
+        console.log(req.session.cookie.expires);
         return res.redirect('/');
       }
       else {

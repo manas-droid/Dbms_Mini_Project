@@ -4,9 +4,13 @@
       <ul class="nav-bar">
         <li><a href="/cart">Cart</a></li>
         <!-- <li><a href="/orders">My Orders</a></li -->
+        <%if(isAuthenticated){%>
+          <li><a href="/orders">Orders</a></li>
+        <li><a href="/logout">Logout</a></li>
+        <%} else { %>
         <li><a href="/login">Login</a></li>
         <li><a href="/signup">Sign up</a></li>
-
+        <% } %>
       </ul>
     </nav>
 </header>

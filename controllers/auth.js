@@ -3,18 +3,29 @@ const Users = require('../models/users');
 const bcrypt = require('bcrypt');
 
 exports.getLogin = (req,res,next)=>{
+  if(!req.session.isLoggedIn){
   res.render('login',{
     title : 'login',
     message : ''
   });
 }
+else{
+  res.redirect('/');
+}
+
+}
 
 
 exports.getSignup = (req,res,next)=>{
-  res.render('signup',{
-    title : 'signup',
-    message : ''
-  });
+  if(!req.session.isLoggedIn){
+    res.render('signup',{
+      title : 'signup',
+      message : ''
+    });
+  }
+  else {
+      res.redirect('/');
+  }
 }
 
 exports.postLogin = (req,res,next)=>{
@@ -53,5 +64,18 @@ if(confirmPassword !== password){
     });
   })
 
+}
 
+
+exports.getLogout = (req,res)=>{
+  if(req.session.isLoggedIn){
+    req.session.destroy(err => {
+      console.log(err);
+      res.redirect('/');
+    });
+  }
+
+  else {
+    res.redirect('/');
+  }
 }

@@ -5,18 +5,41 @@
     <title><%=title%></title>
     <link rel="stylesheet" href="/nav.css">
     <link rel="stylesheet" href="/login.css">
+    <style media="screen">
+    .alert {
+      padding: 20px;
+      background-color: #f44336;
+      color: white;
+    }
 
+    .closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .closebtn:hover {
+      color: black;
+    }
+    </style>
   </head>
+<body>
   <body>
     <!-- <h1>Company Name</h1>
    -->
    <%- include('navigation'); %>
 
-   <div class="">
-     <%if (message.length > 0){%>
-       <%=message%>
-       <%}%>
+   <%if (message.length > 0){%>
+     <div class="alert">
+       <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+       <strong>Error!</strong>   <%=message%>
      </div>
+   <%}%>
     <div class="login-card">
       <form class="login-form" action="/login" method="POST">
         <div class="form-control">

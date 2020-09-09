@@ -11,32 +11,40 @@
 <div class="">
     <%- include('navigation'); %>
     <main>
+      <% if (isOrder) { %>
+      <h1> Your Previous Orders</h1>
+        <% } %>
+
   <% if (products.length > 0) { %>
       <ul class="cart__item-list">
           <% products.forEach(p => { %>
               <li class="cart__item">
                   <h1><%= p.p_name %></h1>
-                  <h2>Quantity: <%= p.quantity %></h2>
                   <h2>Price: <%= p.p_price %></h2>
-                  <form action="/cart-delete-item" method="POST">
-                      <input type="hidden" value="<%= p.p_id %>" name="productId">
+                      <% if (!isOrder) { %>
+                      <h2>Quantity: <%= p.quantity %></h2>
+                      <form action="/cart-delete-item" method="POST">
+                        <input type="hidden" value="<%= p.p_id %>" name="productId">
                       <button class="btn danger" type="submit">Delete</button>
-                  </form>
+                      </form>
+                      <% } %>
+
               </li>
           <% }) %>
       </ul>
       <hr>
       <div class="centered">
-          <form action="/create-order" method="POST">
+          <form action='/create-order-from-<%=parameter%>' method="POST">
               <button type="submit" class="btn">Order Now!</button>
           </form>
       </div>
+      <% if (!isOrder) { %>
       <div class="centered">
-          <form action="/cart" method="GET">
+          <form action="/delete-cart" method="POST">
               <button type="submit" class="btn">Clear Cart</button>
           </form>
       </div>
-
+      <% } %>
   <% } else { %>
       <h1>No Products in Cart!</h1>
   <% } %>

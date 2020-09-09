@@ -24,6 +24,10 @@ td, th {
 tr:nth-child(even) {
   background-color: #dddddd;
 }
+.button{
+  margin: auto;
+  width: 700px;
+}
     </style>
 
   </head>
@@ -41,16 +45,38 @@ tr:nth-child(even) {
         <tr>
           <td><%=p.p_name%></td>
           <td><%=p.p_price%></td>
-          <td><%=p.quantity%></td>
+          <td>
+            <%if(p.quantity){%>
+              <%=p.quantity%>
+            <%}else{%>
+              1
+            <%}%>
+          </td>
         </tr>
       <%})%>
   <%} else {%>
     Dont ever come here
     <%}%>
-    <tfoot>
-    <td>Total : </td>
+    <tfoot id = 'total'>
     </tfoot>
 </table>
+<div class="button">
+  <form action="/delete-orders" method="post">
+    <input type="hidden" name="isOrders" value="yes">
+    <button type="submit" name="button">Make Payment</button>
+  </form>
+</div>
+  <script type="text/javascript">
+  const total = document.querySelector('#total');
+  const product = <%-JSON.stringify(products)%>
+  let totalSum = 0;
+    product.forEach((item, i) => {
+      item.quantity = (item.quantity) ? item.quantity : 1;
+      totalSum += item.quantity * item.p_price;
+    });
+
+    total.innerHTML = `<th>Total: ₹ ${totalSum}</th> `;
+  </script>
 
   </body>
 </html>

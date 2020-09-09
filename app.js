@@ -16,15 +16,12 @@ const homeRouter = require('./routes/home');
 const cartRouter = require('./routes/cart');
 const orderRouter = require('./routes/order');
 
-
   const options = {
       host: 'localhost',
       port: 3306,
       password: 'password',
       database: 'dbms_project',
       user : 'root',
-      clearExpired: true,
-      expiration : Date.now() + 14400000,
       schema: {
        tableName: 'sessions',
        columnNames: {
@@ -35,7 +32,6 @@ const orderRouter = require('./routes/order');
    }
   };
 
-
 app.use(session({
   secret : 'secret',
   resave : 'false',
@@ -43,13 +39,17 @@ app.use(session({
   store : new MySqlStore(options)
 })
 );
+
 app.use(express.static(path.join(__dirname,'public')));
+
 
 //Parse URL-encoded bodies (as sent by HTML forms)
 app.use(bodyParser.urlencoded({extended : false}));
 
-
-
+app.use((req,res,next)=>{
+  res.locals.isAuthenticated = req.session.isLoggedIn;
+  next();
+})
 
 app.set('view engine','ejs');
 
@@ -66,5 +66,4 @@ app.use(orderRouter);
 
 app.listen('3000' , ()=>{
   console.log('Server port 3000');
-
 });
