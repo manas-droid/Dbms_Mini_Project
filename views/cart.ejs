@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title><%=title%></title>
+    <link rel="stylesheet" href="/nav.css">
+
+  </head>
+  <body>
+
+<div class="">
+    <%- include('navigation'); %>
+    <main>
+  <% if (products.length > 0) { %>
+      <ul class="cart__item-list">
+          <% products.forEach(p => { %>
+              <li class="cart__item">
+                  <h1><%= p.p_name %></h1>
+                  <h2>Quantity: <%= p.quantity %></h2>
+                  <h2>Price: <%= p.p_price %></h2>
+                  <form action="/cart-delete-item" method="POST">
+                      <input type="hidden" value="<%= p.p_id %>" name="productId">
+                      <button class="btn danger" type="submit">Delete</button>
+                  </form>
+              </li>
+          <% }) %>
+      </ul>
+      <hr>
+      <div class="centered">
+          <form action="/create-order" method="POST">
+              <button type="submit" class="btn">Order Now!</button>
+          </form>
+      </div>
+      <div class="centered">
+          <form action="/cart" method="GET">
+              <button type="submit" class="btn">Clear Cart</button>
+          </form>
+      </div>
+
+  <% } else { %>
+      <h1>No Products in Cart!</h1>
+  <% } %>
+</main>
+</div>
+  </body>
+
+</html>

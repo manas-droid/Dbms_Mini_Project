@@ -14,6 +14,8 @@ const MySqlStore = require('express-mysql-session')(session);
 const authRouter = require('./routes/auth');
 const homeRouter = require('./routes/home');
 const cartRouter = require('./routes/cart');
+const orderRouter = require('./routes/order');
+
 
   const options = {
       host: 'localhost',
@@ -32,6 +34,7 @@ const cartRouter = require('./routes/cart');
        }
    }
   };
+
 
 app.use(session({
   secret : 'secret',
@@ -55,6 +58,8 @@ app.set('view engine','ejs');
 app.use(authRouter);
 app.use(homeRouter);
 app.use(cartRouter);
+app.use(orderRouter);
+
 
 
 

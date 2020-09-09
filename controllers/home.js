@@ -32,7 +32,7 @@ exports.getHomePage = (req,res)=>{
       console.log( products);
       res.render('home',{
         title : 'home page',
-        setOfIds : '',
+        setOfIds : undefined,
         products
       });
     }).catch(err=>err);

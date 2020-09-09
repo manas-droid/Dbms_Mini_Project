@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title><%=title%></title>
+    <link rel="stylesheet" href="/nav.css">
+
+    <style media="screen">
+      table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 700px;
+}
+.table{
+  margin : 50px auto;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+    </style>
+
+  </head>
+  <body>
+  <%- include('navigation'); %>
+<table class = "table">
+  <tr>
+    <th>Product Name</th>
+    <th>Product Price</th>
+    <th>Quantity</th>
+  </tr>
+
+  <% if (products.length > 0) { %>
+      <% products.forEach(p => { %>
+        <tr>
+          <td><%=p.p_name%></td>
+          <td><%=p.p_price%></td>
+          <td><%=p.quantity%></td>
+        </tr>
+      <%})%>
+  <%} else {%>
+    Dont ever come here
+    <%}%>
+    <tfoot>
+    <td>Total : </td>
+    </tfoot>
+</table>
+
+  </body>
+</html>

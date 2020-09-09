@@ -53,9 +53,9 @@
                                        <%= product.p_description %>
                                    </p>
                                </div>
-                               <%if(setOfIds){%>
 
-                               <%if(!setOfIds.has(product.p_id)) { %>
+
+                               <%if(setOfIds && !setOfIds.has(product.p_id)) { %>
                                  <div class="">
                                   <u>this product is unavailable in your region</u>
                                  <% } else {%>
@@ -66,8 +66,6 @@
                                        <button class="btn btn-avail" type="submit" >Add to Cart</button>
                                      </form>
                                   <% } %>
-
-                            <% } %>
                            </article>
                            <% } %>
                    </div>
